@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 106653971}
   - component: {fileID: 106653970}
   m_Layer: 0
-  m_Name: Wicket (3)
+  m_Name: Wicket (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -251,7 +251,7 @@ Transform:
   m_Children:
   - {fileID: 967061232}
   m_Father: {fileID: 1881686201}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &106653970
 Rigidbody:
@@ -372,7 +372,8 @@ GameObject:
   - component: {fileID: 225175207}
   - component: {fileID: 225175206}
   - component: {fileID: 225175209}
-  m_Layer: 0
+  - component: {fileID: 225175210}
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +451,20 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 1, z: 10}
-  m_Center: {x: 0, y: -1, z: 0}
+  m_Center: {x: 0, y: -0.5, z: 0}
+--- !u!65 &225175210
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225175205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &237808087
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +554,6 @@ GameObject:
   - component: {fileID: 253024603}
   - component: {fileID: 253024602}
   - component: {fileID: 253024604}
-  - component: {fileID: 253024605}
   m_Layer: 0
   m_Name: Wicket (2)
   m_TagString: Untagged
@@ -593,46 +606,35 @@ CapsuleCollider:
   m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!145 &253024604
-SpringJoint:
+--- !u!59 &253024604
+HingeJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253024600}
   m_ConnectedBody: {fileID: 424647934}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 2.59, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.45, y: -2.607, z: 0.0010004044}
-  serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
-  m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
-  m_BreakForce: 50
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
---- !u!145 &253024605
-SpringJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253024600}
-  m_ConnectedBody: {fileID: 1379099913}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.45000052, y: -2.607, z: 0.0010004044}
-  serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
-  m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_ConnectedAnchor: {x: -0.45, y: -0.017000094, z: 0.0010004044}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
   m_BreakForce: 50
   m_BreakTorque: Infinity
   m_EnableCollision: 0
@@ -816,7 +818,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1930,7 +1932,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379099911}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.45000052, y: -0.007999897, z: -0.0010004044}
+  m_LocalPosition: {x: -0.45000052, y: -0.008, z: -0.0010004044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 903576241}
@@ -1949,7 +1951,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -2122,7 +2124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585888098}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.2, z: -7}
+  m_LocalPosition: {x: 0, y: 0.02, z: -7}
   m_LocalScale: {x: 20, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 810523002}
@@ -2259,7 +2261,7 @@ GameObject:
   - component: {fileID: 1632180017}
   - component: {fileID: 1632180016}
   m_Layer: 0
-  m_Name: Wicket (1)
+  m_Name: Wicket (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2278,7 +2280,7 @@ Transform:
   m_Children:
   - {fileID: 1260924063}
   m_Father: {fileID: 1881686201}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1632180016
 Rigidbody:
@@ -2424,7 +2426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754321990}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -30}
+  m_LocalPosition: {x: 0, y: 0.01, z: -30}
   m_LocalScale: {x: 15, y: 60, z: 1}
   m_Children: []
   m_Father: {fileID: 810523002}
@@ -2577,7 +2579,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1881686201}
   - component: {fileID: 1881686202}
-  m_Layer: 0
+  - component: {fileID: 1881686203}
+  m_Layer: 9
   m_Name: KeeperEndWickets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2596,9 +2599,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1972477089}
-  - {fileID: 1632180015}
-  - {fileID: 253024601}
   - {fileID: 106653969}
+  - {fileID: 253024601}
+  - {fileID: 1632180015}
   - {fileID: 1802181693}
   m_Father: {fileID: 368949082}
   m_RootOrder: 1
@@ -2615,8 +2618,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931eb0cb9a1f57a4e99c43961f07ac25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wickets: []
-  bails: []
+  wickets:
+  - {fileID: 106653970}
+  - {fileID: 253024602}
+  - {fileID: 1632180016}
+  bails:
+  - {fileID: 424647934}
+  - {fileID: 1379099913}
+--- !u!65 &1881686203
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881686200}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.82, y: 6, z: 0.35}
+  m_Center: {x: 0, y: 2.17, z: 0}
 --- !u!1 &1887755783
 GameObject:
   m_ObjectHideFlags: 0
@@ -2807,7 +2828,7 @@ GameObject:
   - component: {fileID: 1952677416}
   - component: {fileID: 1952677420}
   - component: {fileID: 1952677421}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CricketBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2821,7 +2842,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952677415}
-  m_Material: {fileID: 13400000, guid: ffd0acdb1df54c547aa549b00507c724, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2916,7 +2937,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 1952677420}
   speed: 50
-  releaseAngle: 45
 --- !u!1 &1955479256
 GameObject:
   m_ObjectHideFlags: 0
@@ -3131,7 +3151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107344170}
   m_LocalRotation: {x: 0.86602545, y: 0, z: 0, w: 0.49999994}
-  m_LocalPosition: {x: 0, y: 0.2, z: -53}
+  m_LocalPosition: {x: 0, y: 0.02, z: -53}
   m_LocalScale: {x: 20, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 810523002}
