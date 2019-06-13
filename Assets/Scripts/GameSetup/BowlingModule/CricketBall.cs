@@ -14,6 +14,7 @@ namespace HitThemWickets
         public CricketBallSettings settings;
         private Vector3 targetPosition;
         private float spin;
+        private float bounce;
         private Vector3 lastPos;
         private Vector3 impulse;
         private float gravity;
@@ -54,6 +55,11 @@ namespace HitThemWickets
         public void SetSpin(float spin)
         {
             this.spin = spin;
+        }
+
+        public void SetBounce(float amount)
+        {
+            bounce = amount;
         }
 
         /// <summary>
@@ -106,7 +112,8 @@ namespace HitThemWickets
             rigidbody.velocity = Vector3.zero;
 
             Vector3 spinForce = Vector3.right * spin * settings.spinFactor * -1;
-            Vector3 bounceForce = Vector3.up * 10;
+            Vector3 bounceForce = Vector3.up * (settings.minBounce + bounce * settings.bounceFactor);
+            Debug.Log($"Bounce Force: {bounceForce}");
             Vector3 forwardForce = Vector3.forward * settings.speed;
             rigidbody.AddForce(spinForce + bounceForce + forwardForce, ForceMode.Impulse);
         }

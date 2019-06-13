@@ -39,6 +39,24 @@ namespace HitThemWickets
     }
 
     /// <summary>
+    /// Event to toggle the ball bounce selector on/off.
+    /// </summary>
+    public class ToggleBounceSelectorEvent : IEvent
+    {
+        private readonly bool isActive;
+
+        public ToggleBounceSelectorEvent(bool isActive)
+        {
+            this.isActive = isActive;
+        }
+
+        public object GetData()
+        {
+            return isActive;
+        }
+    }
+
+    /// <summary>
     /// Event to set the spin amount to the ball.
     /// </summary>
     public class SetSpinEvent : IEvent
@@ -71,6 +89,24 @@ namespace HitThemWickets
         public object GetData()
         {
             return position;
+        }
+    }
+
+    /// <summary>
+    /// Event to set the bounce of the ball.
+    /// </summary>
+    public class SetBounceEvent : IEvent
+    {
+        private float bounce;
+
+        public SetBounceEvent(float bounce)
+        {
+            this.bounce = bounce;
+        }
+
+        public object GetData()
+        {
+            return bounce;
         }
     }
 

@@ -8,8 +8,7 @@ namespace HitThemWickets
     /// </summary>
     public class SpinMeterUI : MonoBehaviour
     {
-        public float speed = 50;
-        public float maxAngle = 30;
+        public SpinMeterSettings settings;
         public RectTransform arrow;
         private float angle;
         private Coroutine meterCycle;
@@ -24,11 +23,11 @@ namespace HitThemWickets
             while (gameObject.activeSelf)
             {
                 angle = Vector3.SignedAngle(Vector3.up, arrow.up, Vector3.forward);
-                arrow.Rotate(Vector3.forward, speed * Time.deltaTime * dir);
-                if (Mathf.Abs(angle) >= maxAngle
+                arrow.Rotate(Vector3.forward, settings.speed * Time.deltaTime * dir);
+                if (Mathf.Abs(angle) >= settings.maxAngle
                     && Mathf.Sign(angle) == dir)
                 {
-                    arrow.rotation = Quaternion.Euler(0, 0, maxAngle * dir);
+                    arrow.rotation = Quaternion.Euler(0, 0, settings.maxAngle * dir);
                     dir *= -1;
                 }
 

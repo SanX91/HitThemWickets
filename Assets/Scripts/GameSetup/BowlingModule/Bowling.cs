@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace HitThemWickets
@@ -15,6 +16,7 @@ namespace HitThemWickets
             NewBall,
             Spinner,
             Indicator,
+            Bouncer,
             EndBall
         }
 
@@ -29,6 +31,7 @@ namespace HitThemWickets
 
             EventManager.Instance.AddListener<SetSpinEvent>(OnSetSpinEvent);
             EventManager.Instance.AddListener<SetPositionEvent>(OnSetPositionEvent);
+            EventManager.Instance.AddListener<SetBounceEvent>(OnSetBounceEvent);
             EventManager.Instance.AddListener<EndBallEvent>(OnEndBallEvent);
         }
 
@@ -50,6 +53,16 @@ namespace HitThemWickets
             ball.SetSpin((float)evt.GetData());
         }
 
+        private void OnSetBounceEvent(SetBounceEvent evt)
+        {
+            ball.SetBounce((float)evt.GetData());
+        }
+
+
+        /// <summary>
+        /// This method requires some cleaning up.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator BowlingCycle()
         {
             //Bowling cycle
@@ -67,7 +80,6 @@ namespace HitThemWickets
 
                 //Start spinner
                 EventManager.Instance.TriggerEvent(new ToggleSpinnerEvent(true));
-                Debug.Log("Start spinner");
                 yield return null;
 
                 //Wait for player's input
@@ -77,15 +89,23 @@ namespace HitThemWickets
                 //Stop spinner, start indicator
                 EventManager.Instance.TriggerEvent(new ToggleSpinnerEvent(false));
                 EventManager.Instance.TriggerEvent(new ToggleIndicatorEvent(true));
-                Debug.Log("Start indicator");
+                yield return null;
+
+                //Wait for player's input
+                yield return new WaitUntil(() => controller.IsReady());
+                state = States.Bouncer;
+
+                //Stop indicator, start bounce selector
+                EventManager.Instance.TriggerEvent(new ToggleIndicatorEvent(false));
+                EventManager.Instance.TriggerEvent(new ToggleBounceSelectorEvent(true));
                 yield return null;
 
                 //Wait for player's input
                 yield return new WaitUntil(() => controller.IsReady());
                 state = States.EndBall;
 
-                //Stop indicator
-                EventManager.Instance.TriggerEvent(new ToggleIndicatorEvent(false));
+                //Stop bounce selector
+                EventManager.Instance.TriggerEvent(new ToggleBounceSelectorEvent(false));
                 yield return null;
 
                 //Bowl
@@ -93,7 +113,6 @@ namespace HitThemWickets
 
                 //Wait for player's input to start next bowling cycle
                 yield return new WaitUntil(() => state == States.NewBall);
-                Debug.Log("The End");
             }
         }
     }

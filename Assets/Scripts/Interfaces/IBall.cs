@@ -9,6 +9,7 @@ namespace HitThemWickets
     {
         void SetSpin(float spin);
         void SetPosition(Vector3 position);
+        void SetBounce(float amount);
         void Bowl();
         void Initialize();
     } 

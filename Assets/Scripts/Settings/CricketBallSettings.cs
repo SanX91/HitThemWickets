@@ -10,6 +10,9 @@ namespace HitThemWickets
     {
         public float speed = 50;
         public float spinFactor = 0.5f;
+        [Range(5,10)]
+        public float minBounce = 5;
+        public float bounceFactor = 10;
         [Range(1, 10)]
         public float launchArc = 5;
         public float minHeight = 0, maxHeight = 100;

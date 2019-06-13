@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3d51d29a1db254418de16b54c48f8cb, type: 3}
-  m_Name: CricketBallSettings
+  m_Script: {fileID: 11500000, guid: e06aeaa7db2c2c642ba555dd5c1cf604, type: 3}
+  m_Name: SpinMeterSettings
   m_EditorClassIdentifier: 
   speed: 50
-  spinFactor: 0.5
-  minBounce: 5
-  bounceFactor: 15
-  launchArc: 5
-  minHeight: 0
-  maxHeight: 100
+  maxAngle: 30
