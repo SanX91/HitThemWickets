@@ -14,6 +14,12 @@ public class Bowling : IBowling
         this.ball = ball;
 
         EventManager.Instance.AddListener<SetSpinEvent>(OnSetSpinEvent);
+        EventManager.Instance.AddListener<SetPositionEvent>(OnSetPositionEvent);
+    }
+
+    private void OnSetPositionEvent(SetPositionEvent evt)
+    {
+        ball.SetPosition((Vector3)evt.GetData());
     }
 
     private void OnSetSpinEvent(SetSpinEvent evt)

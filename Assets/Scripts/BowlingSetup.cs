@@ -9,7 +9,7 @@ public class BowlingSetup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        IController controller = new MouseController();
+        IController controller = new GameController();
         IBowling bowling = new Bowling(controller, ball);
         StartCoroutine(bowling.BowlingCycle());
     }

@@ -9,16 +9,12 @@ public class SpinMeterUI : MonoBehaviour
     public RectTransform arrow;
 
     float angle;
-
-    private void Start()
-    {
-        StartCoroutine(MeterCycle());
-    }
+    Coroutine meterCycle;
 
     IEnumerator MeterCycle()
     {
         float dir = Random.Range(0, 1) == 0?-1:1;
-        while(true)
+        while(gameObject.activeSelf)
         {
             angle = Vector3.SignedAngle(Vector3.up, arrow.up, Vector3.forward);
             arrow.Rotate(Vector3.forward, speed * Time.deltaTime * dir);
@@ -35,11 +31,15 @@ public class SpinMeterUI : MonoBehaviour
 
     public void ToggleMeter(bool isActive)
     {
-        if(isActive)
+        gameObject.SetActive(isActive);
+
+        if (isActive)
         {
-            StartCoroutine(MeterCycle());
+            meterCycle = StartCoroutine(MeterCycle());
+            return;
         }
 
-        gameObject.SetActive(isActive);
+        StopCoroutine(meterCycle);
+        EventManager.Instance.TriggerEvent(new SetSpinEvent(angle));
     }
 }
