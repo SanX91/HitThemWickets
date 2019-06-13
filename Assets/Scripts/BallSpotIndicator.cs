@@ -10,10 +10,13 @@ public class BallSpotIndicator : MonoBehaviour
     Coroutine positionIndicator;
     IController controller;
 
+    public void Initialize(IController controller)
+    {
+        this.controller = controller;
+    }
+
     IEnumerator PositionIndicator()
     {
-        controller = new GameController();
-
         while (gameObject.activeSelf)
         {
             float xPos = transform.position.x - controller.HorizontalAxis() * speed * Time.deltaTime;

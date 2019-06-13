@@ -10,16 +10,28 @@ public class InGamePanel : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public SpinMeterUI spinMeterUI;
 
+    private void Start()
+    {
+        scoreText.gameObject.SetActive(true);
+    }
+
     private void OnEnable()
     {
+        EventManager.Instance.AddListener<NewBallEvent>(OnNewBallEvent);
         EventManager.Instance.AddListener<UpdateScoreUIEvent>(OnUpdateScoreUIEvent);
         EventManager.Instance.AddListener<ToggleSpinnerEvent>(OnToggleSpinnerEvent);
     }
 
     private void OnDisable()
     {
+        EventManager.Instance.RemoveListener<NewBallEvent>(OnNewBallEvent);
         EventManager.Instance.RemoveListener<UpdateScoreUIEvent>(OnUpdateScoreUIEvent);
         EventManager.Instance.RemoveListener<ToggleSpinnerEvent>(OnToggleSpinnerEvent);
+    }
+
+    private void OnNewBallEvent(NewBallEvent evt)
+    {
+        messageText.SetActive(true);
     }
 
     private void OnUpdateScoreUIEvent(UpdateScoreUIEvent evt)
@@ -29,6 +41,11 @@ public class InGamePanel : MonoBehaviour
 
     private void OnToggleSpinnerEvent(ToggleSpinnerEvent evt)
     {
+        if(messageText.activeSelf)
+        {
+            messageText.SetActive(false);
+        }
+
         spinMeterUI.ToggleMeter((bool)evt.GetData());
     }
 }

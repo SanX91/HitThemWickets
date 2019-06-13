@@ -6,10 +6,8 @@ public class BowlingSetup : MonoBehaviour
 {
     public CricketBall ball;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Initialize(IController controller)
     {
-        IController controller = new GameController();
         IBowling bowling = new Bowling(controller, ball);
         StartCoroutine(bowling.BowlingCycle());
     }

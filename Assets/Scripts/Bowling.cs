@@ -5,8 +5,17 @@ using UnityEngine;
 
 public class Bowling : IBowling
 {
+    enum States
+    {
+        NewBall,
+        Spinner,
+        Indicator,
+        EndBall
+    }
+
     IController controller;
     IBall ball;
+    States state;
 
     public Bowling(IController controller, IBall ball)
     {
@@ -15,6 +24,15 @@ public class Bowling : IBowling
 
         EventManager.Instance.AddListener<SetSpinEvent>(OnSetSpinEvent);
         EventManager.Instance.AddListener<SetPositionEvent>(OnSetPositionEvent);
+        EventManager.Instance.AddListener<EndBallEvent>(OnEndBallEvent);
+    }
+
+    private void OnEndBallEvent(EndBallEvent evt)
+    {
+        if(state == States.EndBall)
+        {
+            state = States.NewBall;
+        }
     }
 
     private void OnSetPositionEvent(SetPositionEvent evt)
@@ -32,11 +50,15 @@ public class Bowling : IBowling
         //Bowling cycle
         while(true)
         {
-            Debug.Log("Waiting for input");
+            yield return new WaitForSeconds(2);
+
+            //New Ball Event
+            ball.Initialize();
+            EventManager.Instance.TriggerEvent(new NewBallEvent());
 
             //Start new ball
             yield return new WaitUntil(() => controller.IsReady());
-            Debug.Log("Start new ball");
+            state = States.Spinner;
 
             //Start spinner
             EventManager.Instance.TriggerEvent(new ToggleSpinnerEvent(true));
@@ -45,6 +67,7 @@ public class Bowling : IBowling
 
             //Wait for player's input
             yield return new WaitUntil(() => controller.IsReady());
+            state = States.Indicator;
 
             //Stop spinner, start indicator
             EventManager.Instance.TriggerEvent(new ToggleSpinnerEvent(false));
@@ -54,6 +77,7 @@ public class Bowling : IBowling
 
             //Wait for player's input
             yield return new WaitUntil(() => controller.IsReady());
+            state = States.EndBall;
 
             //Stop indicator
             EventManager.Instance.TriggerEvent(new ToggleIndicatorEvent(false));
@@ -63,7 +87,8 @@ public class Bowling : IBowling
             ball.Bowl();
 
             //Wait for player's input to start next bowling cycle
-            yield return new WaitUntil(() => controller.IsReady());
+            yield return new WaitUntil(() => state == States.NewBall);
+            Debug.Log("The End");
         }
     }
 }

@@ -74,3 +74,26 @@ public class UpdateScoreUIEvent : IEvent
         return score;
     }
 }
+
+public class NewBallEvent : IEvent
+{
+    public object GetData()
+    {
+        return true;
+    }
+}
+
+public class EndBallEvent : IEvent
+{
+    bool isWicket;
+
+    public EndBallEvent(bool isWicket = false)
+    {
+        this.isWicket = isWicket;
+    }
+
+    public object GetData()
+    {
+        return isWicket;
+    }
+}
