@@ -59,3 +59,18 @@ public class SetPositionEvent : IEvent
         return position;
     }
 }
+
+public class UpdateScoreUIEvent : IEvent
+{
+    int score;
+
+    public UpdateScoreUIEvent(int score)
+    {
+        this.score = score;
+    }
+
+    public object GetData()
+    {
+        return score;
+    }
+}
