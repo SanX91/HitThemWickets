@@ -1,8 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public static class GameConstants
+﻿namespace HitThemWickets
 {
-    public const string GroundLayer = "Ground";
+    public static class GameConstants
+    {
+        //Layers
+        public const string GroundLayer = "Ground";
+
+        //Inputs
+        public const string HorizontalAxis = "Horizontal";
+        public const string VerticalAxis = "Vertical";
+    } 
 }

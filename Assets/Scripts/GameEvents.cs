@@ -1,99 +1,123 @@
 ﻿using UnityEngine;
 
-public class ToggleSpinnerEvent : IEvent
+namespace HitThemWickets
 {
-    bool isActive;
-
-    public ToggleSpinnerEvent(bool isActive)
+    /// <summary>
+    /// Event to toggle the spinner on/off.
+    /// </summary>
+    public class ToggleSpinnerEvent : IEvent
     {
-        this.isActive = isActive;
+        private readonly bool isActive;
+
+        public ToggleSpinnerEvent(bool isActive)
+        {
+            this.isActive = isActive;
+        }
+
+        public object GetData()
+        {
+            return isActive;
+        }
     }
 
-    public object GetData()
+    /// <summary>
+    /// Event to toggle the ball spot indicator on/off.
+    /// </summary>
+    public class ToggleIndicatorEvent : IEvent
     {
-        return isActive;
-    }
-}
+        private readonly bool isActive;
 
-public class ToggleIndicatorEvent : IEvent
-{
-    bool isActive;
+        public ToggleIndicatorEvent(bool isActive)
+        {
+            this.isActive = isActive;
+        }
 
-    public ToggleIndicatorEvent(bool isActive)
-    {
-        this.isActive = isActive;
-    }
-
-    public object GetData()
-    {
-        return isActive;
-    }
-}
-
-public class SetSpinEvent : IEvent
-{
-    float spin;
-
-    public SetSpinEvent(float spin)
-    {
-        this.spin = spin;
+        public object GetData()
+        {
+            return isActive;
+        }
     }
 
-    public object GetData()
+    /// <summary>
+    /// Event to set the spin amount to the ball.
+    /// </summary>
+    public class SetSpinEvent : IEvent
     {
-        return spin;
-    }
-}
+        private readonly float spin;
 
-public class SetPositionEvent : IEvent
-{
-    Vector3 position;
+        public SetSpinEvent(float spin)
+        {
+            this.spin = spin;
+        }
 
-    public SetPositionEvent(Vector3 position)
-    {
-        this.position = position;
-    }
-
-    public object GetData()
-    {
-        return position;
-    }
-}
-
-public class UpdateScoreUIEvent : IEvent
-{
-    int score;
-
-    public UpdateScoreUIEvent(int score)
-    {
-        this.score = score;
+        public object GetData()
+        {
+            return spin;
+        }
     }
 
-    public object GetData()
+    /// <summary>
+    /// Event to set the trajectory position to the ball.
+    /// </summary>
+    public class SetPositionEvent : IEvent
     {
-        return score;
-    }
-}
+        private Vector3 position;
 
-public class NewBallEvent : IEvent
-{
-    public object GetData()
-    {
-        return true;
-    }
-}
+        public SetPositionEvent(Vector3 position)
+        {
+            this.position = position;
+        }
 
-public class EndBallEvent : IEvent
-{
-    bool isWicket;
-
-    public EndBallEvent(bool isWicket = false)
-    {
-        this.isWicket = isWicket;
+        public object GetData()
+        {
+            return position;
+        }
     }
 
-    public object GetData()
+    /// <summary>
+    /// Event to update the score UI.
+    /// </summary>
+    public class UpdateScoreUIEvent : IEvent
     {
-        return isWicket;
+        private readonly int score;
+
+        public UpdateScoreUIEvent(int score)
+        {
+            this.score = score;
+        }
+
+        public object GetData()
+        {
+            return score;
+        }
+    }
+
+    /// <summary>
+    /// Event signifying that it's a new ball.
+    /// </summary>
+    public class NewBallEvent : IEvent
+    {
+        public object GetData()
+        {
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// Event signifying that a bowling cycle has come to an end.
+    /// </summary>
+    public class EndBallEvent : IEvent
+    {
+        private readonly bool isWicket;
+
+        public EndBallEvent(bool isWicket = false)
+        {
+            this.isWicket = isWicket;
+        }
+
+        public object GetData()
+        {
+            return isWicket;
+        }
     }
 }

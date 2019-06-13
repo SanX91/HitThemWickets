@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Ballistic Physics Helper methods. Source - https://unity3d.college/2017/06/30/unity3d-cannon-projectile-ballistics/
@@ -30,8 +28,7 @@ public static class BallisticPhysics
         float c0 = Vector3.Dot(targetVelXZ, targetVelXZ) - lateralSpeed * lateralSpeed;
         float c1 = 2f * Vector3.Dot(diffXZ, targetVelXZ);
         float c2 = Vector3.Dot(diffXZ, diffXZ);
-        double t0, t1;
-        int n = SolveQuadric(c0, c1, c2, out t0, out t1);
+        int n = SolveQuadric(c0, c1, c2, out double t0, out double t1);
 
         // pick smallest, positive time
         bool valid0 = n > 0 && t0 > 0;
@@ -39,11 +36,17 @@ public static class BallisticPhysics
 
         float t;
         if (!valid0 && !valid1)
+        {
             return false;
+        }
         else if (valid0 && valid1)
+        {
             t = Mathf.Min((float)t0, (float)t1);
+        }
         else
+        {
             t = valid0 ? (float)t0 : (float)t1;
+        }
 
         // Calculate impact point
         impactPoint = target + (targetVelocity * t);
@@ -67,7 +70,7 @@ public static class BallisticPhysics
         return true;
     }
 
-    static int SolveQuadric(double c0, double c1, double c2, out double s0, out double s1)
+    private static int SolveQuadric(double c0, double c1, double c2, out double s0, out double s1)
     {
         s0 = double.NaN;
         s1 = double.NaN;
@@ -99,7 +102,7 @@ public static class BallisticPhysics
         }
     }
 
-    static bool IsZero(double d)
+    private static bool IsZero(double d)
     {
         const double eps = 1e-9;
         return d > -eps && d < eps;

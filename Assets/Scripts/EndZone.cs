@@ -1,12 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EndZone : MonoBehaviour
+namespace HitThemWickets
 {
-    private void OnTriggerEnter(Collider other)
+    /// <summary>
+    /// If the ball enters this region, in a bowling cycle, it triggers the end of that bowling cycle.
+    /// </summary>
+    public class EndZone : MonoBehaviour
     {
-        EventManager.Instance.TriggerEvent(new EndBallEvent());
-        Debug.Log($"Collider: {other.name}");
+        private void OnTriggerEnter(Collider other)
+        {
+            EventManager.Instance.TriggerEvent(new EndBallEvent());
+            Debug.Log($"Collider: {other.name}");
+        }
     }
 }
